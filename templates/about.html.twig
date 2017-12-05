@@ -1,11 +1,5 @@
-{% extends "base.html.twig" %}
-{% block title %}Информация о магазине{% endblock %}
-{% block body %}
-{% block content %}
-    <h1>О нас</h1>
-    <div id="about">
-        <p>Приветствуем Вас! Сегодня <strong>{{date}}</strong></p>
-        <p>Здесь мы напишем информацию о нашем магазине <strong>{{shopName}}</strong>, когда придумаем.</p>
-    </div>
-{% endblock %}
-{% endblock %}
+About
+<a href="{{ notebooksUrl }}">Notebooks</a>
+<a href="{{ path('category_show', {'slug': 'tvs', 'page': 5}) }}">TVs</a>
+<a href="{{ url('category_show', {'slug': 'media', 'page': 5}) }}">Media centres</a>
+<p>Last Visited Category: {{ lastCategory }}</p>
