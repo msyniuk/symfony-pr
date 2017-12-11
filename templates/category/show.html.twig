@@ -2,8 +2,6 @@
     <p>{{ message }}</p>
 {% endfor %}
 
-Category: {{ slug }}<br>
-Page: {{ page }}<br>
-Param: {{ param }}
+Category: {{ category.name }}<br>
 
 <p><a href="{{ path('category_message') }}">Add to cart</a></p>

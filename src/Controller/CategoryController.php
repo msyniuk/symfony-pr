@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 
-
+use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -14,23 +14,13 @@ class CategoryController extends Controller
 {
 
     /**
-     * @Route("/category/{slug}/{page}", name="category_show", requirements={"page": "\d+"})
-     *
-     * @param $slug
-     * @param $page
-     * @param $session
-     *
-     * @return Response
+     * @Route("/category/{id}", name="category_show")
      */
-    public function show($slug, $page = 1, SessionInterface $session,
-        Request $request)
+    public function show(Category $category)
     {
-        $session->set('lastVisitedCategory', $slug);
-        $param = $request->query->get('param');
-
         return $this->render(
             'category/show.html.twig',
-            ['slug' => $slug, 'page' => $page, 'param' => $param]
+            ['category' => $category]
         );
     }
 
@@ -42,7 +32,7 @@ class CategoryController extends Controller
         $this->addFlash('notice', 'Successfully added!');
         $lastCategory= $session->get('lastVisitedCategory');
 
-        return $this->redirectToRoute('category_show', ['slug' => $lastCategory]);
+        return $this->redirectToRoute('category_show', ['id' => $lastCategory]);
     }
 
     /**
@@ -54,6 +44,27 @@ class CategoryController extends Controller
         $response->setContent('Test content');
 
         return $response;
+    }
+
+    /**
+     * @Route("/categories/{name}", name="categories_list")
+     */
+    public function listCategories($name = '')
+    {
+        $repo = $this->getDoctrine()->getRepository(Category::class);
+        //$product = $repo->findOneBy(['name' => $name]);
+        //$product = $repo->findOneByName($name);
+        if ( $name ) {
+            $categories = $repo->findBy(['name' => $name]);
+        } else {
+            $categories = $repo->findAll();
+        }
+
+        if ( !$categories ) {
+            return $this->createNotFoundException('Categories not found');
+        }
+
+        return $this->render('category/list.html.twig', ['categories' => $categories]);
     }
 
 }
