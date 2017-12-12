@@ -3,5 +3,5 @@
 {% endfor %}
 
 Category: {{ category.name }}<br>
-
+<a href="{{ path('category_show'), {'id': category.id} }}">{{ category.name }}</a>
 <p><a href="{{ path('category_message') }}">Add to cart</a></p>
