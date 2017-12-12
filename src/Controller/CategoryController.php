@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Category;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -14,13 +15,24 @@ class CategoryController extends Controller
 {
 
     /**
-     * @Route("/category/{id}", name="category_show")
+     * @Route("/category/{slug}/{page}", name="category_show",
+     * requirements={"page": "\d+"})
+     *
+     * @ParamConverter("slug", options={"mapping": {"slug": "slug"}})
+     *
+     * @param Category $category
+     * @param $page
+     * @param $session
+     *
+     * @return Response
      */
-    public function show(Category $category)
+    public function show(Category $category, $page = 1, SessionInterface $session)
     {
+        $session->set('lastVisitedCategory', $category->getId());
+
         return $this->render(
             'category/show.html.twig',
-            ['category' => $category]
+            ['category' => $category, 'page' => $page]
         );
     }
 
