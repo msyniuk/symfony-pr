@@ -1,5 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title  %}
+    О магазине
+{% endblock title %}
+{% block body %}
 About
 <a href="{{ notebooksUrl }}">Notebooks</a>
 <a href="{{ path('category_show', {'slug': 'tvs', 'page': 5}) }}">TVs</a>
 <a href="{{ url('category_show', {'slug': 'media', 'page': 5}) }}">Media centres</a>
 <p>Last Visited Category: {{ lastCategory }}</p>
+{% endblock body %}
