@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Category;
+use App\Service\Catalogue;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CategoryController extends Controller
 {
+    /**
+     *@var Catalogue
+     */
+    private $catalogue;
+
+    public function __construct(Catalogue $catalogue)
+    {
+        $this->catalogue = $catalogue;
+    }
 
     /**
      * @Route("/category/{slug}/{page}", name="category_show",
@@ -63,17 +73,10 @@ class CategoryController extends Controller
      */
     public function listCategories($name = '')
     {
-        $repo = $this->getDoctrine()->getRepository(Category::class);
-        //$product = $repo->findOneBy(['name' => $name]);
-        //$product = $repo->findOneByName($name);
-        if ( $name ) {
-            $categories = $repo->findBy(['name' => $name]);
-        } else {
-            $categories = $repo->findAll();
-        }
+        $categories = $this->catalogue->getCategories();
 
         if ( !$categories ) {
-            return $this->createNotFoundException('Categories not found');
+            throw $this->createNotFoundException('Categories not found');
         }
 
         return $this->render('category/list.html.twig', ['categories' => $categories]);

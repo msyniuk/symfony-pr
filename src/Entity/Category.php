@@ -36,6 +36,20 @@ class Category
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="category")
      */
     private $products;
+    /**
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\JoinColumn(name="parent_id", onDelete="CASCADE")
+     */
+    private $parent;
+
+    /**
+     * @var Category[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parent")
+     */
+    private $subcategories;
 
     /**
      * @return mixed
