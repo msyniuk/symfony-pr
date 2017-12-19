@@ -4,8 +4,13 @@
     Категории - {{ parent() }}
 {% endblock title %}
 {% block body %}
-{% for category in categories %}
-    <a href="{{ path('category_show', {'slug': category.slug}) }}">{{ category.name }}</a>
-    <hr>
-{% endfor %}
+    <ul class="list-group">
+        {% for category in categories %}
+            <li class="list-group-item">
+                <a class="btn btn-primary"
+                   href="{{ path('category_show', {'slug': category.slug}) }}">{{ category.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock body%}

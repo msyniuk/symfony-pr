@@ -22,11 +22,11 @@ security:
 
             # activate different ways to authenticate
 
-            http_basic: ~
+            # http_basic: ~
             # https://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
 
             # form_login: ~
             # https://symfony.com/doc/current/cookbook/security/form_login_setup.html
-    access_control:
+    #access_control:
         # require ROLE_ADMIN for /admin*
-        - { path: ^/category, roles: ROLE_ADMIN }
+    #    - { path: ^/category, roles: ROLE_ADMIN }
