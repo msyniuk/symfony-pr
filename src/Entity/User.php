@@ -3,94 +3,94 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
+
 
 /**
-  * @ORM\Entity()
+ * @ORM\Entity
+ * @ORM\Table(name="users")
  */
-class User implements UserInterface, \Serializable
+class User extends BaseUser
 {
     /**
-     * @ORM\Column(type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @var string
+     *
+     * @ORM\Column(type="string", length=250)
      */
-    private $username;
+    private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @var string
+     *
+     * @ORM\Column(type="string", length=250)
      */
-    private $password;
-
-    /**
-     * @ORM\Column(type="string", length=60, unique=true)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
-    private $isActive;
+    private $lastName;
 
     public function __construct()
     {
-        $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid('', true));
+        parent::__construct();
+        // your own logic
     }
 
-    public function getUsername()
+    /**
+     * @return string
+     */
+    public function getFirstName(): string
     {
-        return $this->username;
+        return $this->firstName;
     }
 
-    public function getSalt()
+    /**
+     * @param string $firstName
+     * @return User
+     */
+    public function setFirstName(string $firstName): User
     {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
-        return null;
+        $this->firstName = $firstName;
+        return $this;
     }
 
-    public function getPassword()
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
-        return $this->password;
+        return $this->id;
     }
 
-    public function getRoles()
+    /**
+     * @param mixed $id
+     * @return User
+     */
+    public function setId($id)
     {
-        return array('ROLE_USER');
+        $this->id = $id;
+        return $this;
     }
 
-    public function eraseCredentials()
+    /**
+     * @return string
+     */
+    public function getLastName(): string
     {
+        return $this->lastName;
     }
 
-    /** @see \Serializable::serialize() */
-    public function serialize()
+    /**
+     * @param string $lastName
+     * @return User
+     */
+    public function setLastName(string $lastName): User
     {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
-        ));
+        $this->lastName = $lastName;
+        return $this;
     }
 
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized);
-    }
 }

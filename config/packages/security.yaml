@@ -1,17 +1,15 @@
 security:
     # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory:
-                users:
-                    corben1979:
-                        password: 123456
-                        roles: 'ROLE_USER'
-                    admin:
-                        password: 123123
-                        roles: 'ROLE_ADMIN'
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+
     encoders:
-            Symfony\Component\Security\Core\User\User: plaintext
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
 
     firewalls:
         dev:
@@ -20,13 +18,11 @@ security:
         main:
             anonymous: ~
 
-            # activate different ways to authenticate
+            form_login:
+                provider: fos_userbundle
 
-            # http_basic: ~
-            # https://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+            logout:       true
 
-            # form_login: ~
-            # https://symfony.com/doc/current/cookbook/security/form_login_setup.html
-    #access_control:
-        # require ROLE_ADMIN for /admin*
-    #    - { path: ^/category, roles: ROLE_ADMIN }
+    access_control:
+        - { path: ^/profile, roles: ROLE_USER }
+

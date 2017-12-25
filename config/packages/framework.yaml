@@ -15,7 +15,8 @@ framework:
     php_errors:
         log: true
 
-knp_menu:
-        # use "twig: false" to disable the Twig extension and the TwigRenderer
-        twig:
-            template: menu.html.twig
+    translator: ~
+
+    templating:
+        engines: twig
+
