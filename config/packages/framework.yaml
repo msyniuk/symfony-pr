@@ -1,6 +1,6 @@
 framework:
     secret: '%env(APP_SECRET)%'
-    #default_locale: en
+    #default_locale: 'ru'
     #csrf_protection: ~
     #http_method_override: true
     #trusted_hosts: ~
@@ -15,7 +15,8 @@ framework:
     php_errors:
         log: true
 
-    translator: ~
+    translator:
+        fallbacks: ['ru']
 
     templating:
         engines: twig
