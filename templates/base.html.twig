@@ -90,7 +90,29 @@
                         </div>
                         </form>
                     </li>
-                    <li><a href="symfony-pr.ll/register">Регистрация</a></li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#registerForm">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+
+                        <!-- Modal -->
+
+                        <form action="{{ path("fos_user_registration_register") }}" method="post">
+                            <div class="modal fade" id="registerForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                            <button type="submit" id="_submit" name="_submit" class="btn btn-primary">{{ 'registration.submit'|trans({} , 'FOSUserBundle') }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
                 {% endif %}
 
             </ul>
