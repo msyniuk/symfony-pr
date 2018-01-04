@@ -72,7 +72,7 @@ class Category
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ? string
     {
         return $this->name;
     }
@@ -90,7 +90,7 @@ class Category
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug(): ? string
     {
         return $this->slug;
     }
@@ -125,6 +125,65 @@ class Category
     {
         $this->products->removeElement($product);
 
+        return $this;
+    }
+
+    public function getFullName()
+    {
+        $ret = [];
+
+        if ($this->parent) {
+            $parent = $this->parent;
+
+            while ($parent){
+                $ret[] = $parent->name;
+                $parent = $parent->parent;
+            }
+        }
+
+        $ret = $this->name;
+
+        return implode(' / ', $ret);
+    }
+
+    public function __toString()
+    {
+        return $this->getFullName() ?: '';
+    }
+
+    /**
+     * @return Category
+     */
+    public function getParent(): ? Category
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param Category $parent
+     * @return Category
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+        return $this;
+    }
+
+    /**
+     * @return Category[]|ArrayCollection
+     */
+    public function getSubcategories()
+    {
+        return $this->subcategories;
+    }
+
+    /**
+     * @param Category[]|ArrayCollection $subcategories
+     * @return Category
+     */
+    public function setSubcategories($subcategories)
+    {
+        $this->subcategories = $subcategories;
         return $this;
     }
 
