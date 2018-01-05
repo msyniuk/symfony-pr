@@ -92,7 +92,7 @@ class Category
      */
     public function getSlug(): ? string
     {
-        return $this->slug;
+        return $this->slug ?: '';
     }
 
     /**
@@ -141,7 +141,7 @@ class Category
             }
         }
 
-        $ret = $this->name;
+        $ret[] = $this->name;
 
         return implode(' / ', $ret);
     }

@@ -12,7 +12,7 @@ class CategoryAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name')
+            ->add('name', null, ['label' => 'Категория'])
             ->add('slug')
             ->add('parent')
         ;
