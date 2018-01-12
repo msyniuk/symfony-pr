@@ -4,8 +4,8 @@ fos_user:
     user_class: App\Entity\User
 
     from_email:
-        address: 'msyniuk@gmail.com'
-        sender_name: 'Administrator'
+        address: '%env(MAILER_FROM)%'
+        sender_name: '%env(MAILER_FROM_NAME)%'
 
     registration:
         confirmation:

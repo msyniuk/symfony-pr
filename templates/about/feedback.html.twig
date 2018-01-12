@@ -3,7 +3,21 @@
     Обратная связь
 {% endblock title %}
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                {% for message in app.flashes('info') %}
+                    <p class="bg-success">{{ message }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-default">Отправить</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock body %}
