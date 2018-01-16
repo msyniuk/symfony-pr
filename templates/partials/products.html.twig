@@ -1,0 +1,16 @@
+{% for product in products %}
+    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 product">
+        {% if product.imageName %}
+            {#<img src="//placehold.it/400x400" class="img-thumbnail img-responsive center-block">#}
+        {% else %}
+            <img src="//placehold.it/400x400" class="img-thumbnail img-responsive center-block">
+        {% endif %}
+        <p>
+            <span class="price">{{ product.price|number_format(2, ',', ' ') }}</span>
+            {{ product.name }}
+        </p>
+        <p>
+            <a href="{{ path('order_add_product', {'id': product.id, 'count': 1}) }}">Добавить в корзину</a>
+        </p>
+    </div>
+{% endfor %}

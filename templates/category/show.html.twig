@@ -11,12 +11,7 @@ Category: {{ category.name }}<br>
 Page: {{ page }}<br>
 
 Products:
-{% for product in category.products %}
-    <hr>
-    <a href="{{ path('product_show', {'id': product.id}) }}">
-        {{ product.name }} - {{ product.price|number_format(2, ',', ' ') }}
-    </a>
-{% endfor %}
-
-<p><a href="{{ path('category_message') }}">Add to cart</a></p>
+<div class="row">
+    {% include 'partials/products.html.twig' with {'products': category.products} %}
+</div>
 {% endblock body%}
