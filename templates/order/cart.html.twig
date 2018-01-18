@@ -2,31 +2,32 @@
 
 {% block body %}
     <div class="container-fluid">
-        <h1>Корзина</h1>
-        <table class="table table-bordered">
+        <h2>Корзина</h2>
+        <table class="table table-striped">
         <tr>
             <th>Товар</th>
             <th>Цена</th>
             <th>Количество</th>
-            <th>Стоимость</th>
+            <th colspan="2">Стоимость</th>
         </tr>
-    {# @var item \App\Entity\OrderItem #}
-    {% for item in order.items %}
-        <tr>
-            <td>{{ item.product.name }}</td>
-            <td>{{ item.product.price }}</td>
-            <td>{{ item.count }}</td>
-            <td>{{ item.amount }}</td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                Всего
-            </td>
-            <td>{{ order.count }}</td>
-            <td>{{ order.amount }}</td>
-        </tr>
+        {# @var item \App\Entity\OrderItem #}
+        {% for item in order.items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.product.price }}</td>
+                <td>{{ item.count }}</td>
+                <td>{{ item.amount }}</td>
+                <td><a href="{{ path('order_remove_item', {'id': item.id}) }}"><span class="glyphicon glyphicon-remove-circle"></span></a></td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td colspan="2">
+                    <b>Всего</b>
+                </td>
+                <td class=""><b>{{ order.count }}</b></td>
+                <td><b>{{ order.amount }}</b></td>
+            </tr>
         </table>
-    {% endfor %}
     </div>
 
 {% endblock body%}

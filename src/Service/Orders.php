@@ -77,4 +77,16 @@ class Orders
         $this->em->flush();
     }
 
+    public function removeItem(OrderItem $item)
+    {
+        $order = $this->getCurrentOrder();
+
+        $order->removeItem($item);
+
+        $order->recalculateItems();
+        //$order->setCount($order->getCount() - $item->getCount());
+
+        $this->em->flush();
+    }
+
 }

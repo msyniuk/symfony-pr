@@ -46,9 +46,9 @@
                 {% if ordersService.currentOrder.count %}
                     <li>
                         <p class="navbar-text">
-                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            <a href="{{ path('order_cart') }}"><span class="glyphicon glyphicon-shopping-cart"></span>
                             <span class="badge">{{ ordersService.currentOrder.count }}</span>
-                            {{ ordersService.currentOrder.amount }}
+                                {{ ordersService.currentOrder.amount }}</a>
                         </p>
                     </li>
                 {% endif %}

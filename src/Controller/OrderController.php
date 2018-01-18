@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\OrderItem;
 use App\Entity\Product;
 use App\Service\Orders;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,17 @@ class OrderController extends Controller
         $orders->addProduct($product, $count);
 
         return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * @Route("order/remove-item/{id}", name="order_remove_item",
+     *     requirements={"id": "\d+"})
+     */
+    public function removeItem(OrderItem $item, Orders $orders)
+    {
+        $orders->removeItem($item);
+
+        return $this->redirectToRoute('order_cart');
     }
 
     /**
