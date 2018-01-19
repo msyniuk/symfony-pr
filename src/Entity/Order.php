@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -54,14 +55,30 @@ class Order
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=250)
+     * @ORM\Column(type="string", length=250, options={"default": ""})
+     * @Assert\NotBlank(groups={"completeOrder"})
+     */
+    private $customerName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=250, options={"default": ""})
+     * @Assert\NotBlank(groups={"completeOrder"})
+     * @Assert\Regex("/^\+?[ -\(\)\d]+$/", groups={"completeOrder"})
+     * @Assert\Length(
+     *     min = 5,
+     *     minMessage = "Введите номер с кодом города и оператора",
+     *     groups={"completeOrder"}
+     *     )
      */
     private $phone;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=250)
+     * @ORM\Column(type="string", length=250, options={"default": ""})
+     * @Assert\NotBlank(groups={"completeOrder"})
      */
     private $email;
 
@@ -69,6 +86,7 @@ class Order
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(groups={"completeOrder"})
      */
     private $address;
 
@@ -109,6 +127,7 @@ class Order
         $this->count = 0;
         $this->amount = 0;
         $this->phone = '';
+        $this->customerName = '';
         $this->email = '';
         $this->status = self::STATUS_DRAFT;
         $this->isPaid = false;
@@ -340,5 +359,25 @@ class Order
             $this->amount += $item->getAmount();
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getCustomerName(): string
+    {
+        return $this->customerName;
+    }
+
+    /**
+     * @param string $customerName
+     * @return Order
+     */
+    public function setCustomerName(string $customerName): Order
+    {
+        $this->customerName = $customerName;
+        return $this;
+    }
+
+
 
 }

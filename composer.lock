@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "94a0ad80a874b6ea00f586630b05b5ce",
+    "content-hash": "1ee0f4e24131e7555faf73c6d80673a1",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5020,16 +5020,16 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v4.0.2",
+            "version": "4.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "26fc2a1e167ef1193def50f03d39e40456c8ccb9"
+                "reference": "f0204f106a1f189b4496c588218be95a0e76eda5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/26fc2a1e167ef1193def50f03d39e40456c8ccb9",
-                "reference": "26fc2a1e167ef1193def50f03d39e40456c8ccb9",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/f0204f106a1f189b4496c588218be95a0e76eda5",
+                "reference": "f0204f106a1f189b4496c588218be95a0e76eda5",
                 "shasum": ""
             },
             "require": {
@@ -5100,7 +5100,7 @@
             ],
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14T19:48:22+00:00"
+            "time": "2018-01-18T22:19:33+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -5736,7 +5736,8 @@
         "doctrine/annotations": 20,
         "friendsofsymfony/user-bundle": 20,
         "liip/imagine-bundle": 20,
-        "symfony/lts": 20
+        "symfony/lts": 20,
+        "symfony/validator": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

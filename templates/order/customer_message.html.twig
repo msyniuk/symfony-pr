@@ -1,0 +1,9 @@
+<h1>Ваш заказ на сайте <a href="{{ url('homepage') }}">{{ url('homepage') }}</a> принят в обработку.</h1>
+
+{% include 'order/items.html.twig' with {'order': order} %}
+
+<h2>Вы заказали:</h2>
+<p>Имя: {{ order.customerName }}</p>
+<p>Email: {{ order.email }}</p>
+<p>Телефон: {{ order.phone }}</p>
+<p>Адрес: {{ order.address }}</p>

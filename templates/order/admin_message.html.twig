@@ -1,0 +1,8 @@
+<h1>Новый заказ на сайте</h1>
+
+{% include 'order/items.html.twig' with {'order': order} %}
+
+<p>Имя: {{ order.customerName }}</p>
+<p>Email: {{ order.email }}</p>
+<p>Телефон: {{ order.phone }}</p>
+<p>Адрес: {{ order.address }}</p>
