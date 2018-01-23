@@ -135,6 +135,9 @@ class OrderItem
     public function setCount(float $count): OrderItem
     {
         $this->count = $count;
+        $this->amount = $this->product->getPrice() * $count;
+        $this->order->recalculateItems();
+
         return $this;
     }
 

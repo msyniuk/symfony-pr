@@ -96,6 +96,14 @@ class Order
     const STATUS_RECEVIED = 3;
     const STATUS_COMPLETED = 4;
 
+    static public $statuses = [
+        self::STATUS_DRAFT => 'draft',
+        self::STATUS_ORDERED => 'ordered',
+        self::STATUS_SENT => 'sent',
+        self::STATUS_RECEVIED => 'recevied',
+        self::STATUS_COMPLETED => 'completed',
+    ];
+
     /**
      * @var int
      *
@@ -284,6 +292,11 @@ class Order
     public function getStatus(): int
     {
         return $this->status;
+    }
+
+    public function getStatusLabel(): string
+    {
+        return self::$statuses[$this->status];
     }
 
     /**
